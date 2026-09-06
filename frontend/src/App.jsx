@@ -26,7 +26,7 @@ export default function App() {
     localStorage.setItem("chat_room", room);
 
     try {
-      const res = await fetch(`http://localhost:8000/chat/history/${room}`);
+      const res = await fetch(`https://pulse-chat-backend-5vla.onrender.com/chat/history/${room}`);
       if (res.ok) {
         const history = await res.json();
         setMessages(history);
@@ -35,7 +35,7 @@ export default function App() {
       console.error("Failed to fetch message history:", err);
     }
 
-    const ws = new WebSocket(`ws://localhost:8000/ws/chat/${room}`);
+    const ws = new WebSocket(`wss://pulse-chat-backend-5vla.onrender.com/ws/chat/${room}`);
 
     ws.onmessage = (event) => {
       const incoming = JSON.parse(event.data);
